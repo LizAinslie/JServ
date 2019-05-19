@@ -5,6 +5,10 @@ import java.util.List;
 
 import lombok.Getter;
 
+/**
+ * MIME types that can be sent from the server.
+ * @author RailRunner16
+ */
 @Getter
 public enum MimeType {
     // Web resources
@@ -49,6 +53,11 @@ public enum MimeType {
     private String mimeString;
     private List<String> fileExtensions;
 
+    /**
+     * Register a new MIME type with the given extensions and MIME string.
+     * @param mimeString The MIME string to use when serving files with these extensions.
+     * @param fileExtension The extensions of the files to serve with this MIME type.
+     */
     MimeType(String mimeString, String... fileExtension) {
         this.mimeString = mimeString;
         this.fileExtensions = Arrays.asList(fileExtension);

@@ -21,6 +21,10 @@ import me.railrunner16.server.routing.Mappings;
 import me.railrunner16.server.routing.Route;
 import me.railrunner16.server.util.file.MimeType;
 
+/**
+ * A web server
+ * @author RailRunner16
+ */
 public final class Server{
     @Getter
     private int port;
@@ -32,12 +36,23 @@ public final class Server{
     @Getter
     private Mappings mappings;
 
+    /**
+     * Instantiate a new server.
+     * @param port The port to listen on.
+     * @param mappings The route mappings.
+     * @throws IOException
+     */
     public Server(int port, Mappings mappings) throws IOException {
         this.port = port;
         this.server = new ServerSocket(this.port);
         this.mappings = mappings;
     }
 
+    /**
+     * Accept a request.
+     * @return The accepted request.
+     * @throws IOException
+     */
     public Request accept() throws IOException {
         client = this.server.accept();
         InputStream is = client.getInputStream();
@@ -51,6 +66,10 @@ public final class Server{
         return request;
     }
 
+    /**
+     * Shut the server down and close all connections.
+     * @throws IOException
+     */
     public void shutdown() throws IOException {
         this.server.close();
     }
@@ -72,6 +91,11 @@ public final class Server{
         return resp;
     }
 
+    /**
+     * Send a response based on a request.
+     * @param req The request.
+     * @throws IOException
+     */
     public void sendResponse(Request req) throws IOException {
         System.out.println(req.getMethod().toString() + " " + req.getUrl());
         Response resp = getResponse(req);
